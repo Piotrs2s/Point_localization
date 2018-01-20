@@ -1,0 +1,11 @@
+C:\Users\achuc\Documents\Visual Studio 2015\Projects\Geometria Obliczeniowa\Geometria Obliczeniowa\bin\Debug\Geometria Obliczeniowa.exe.config
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\bin\Debug\Geometria Obliczeniowa.exe.config
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\bin\Debug\Geometria Obliczeniowa.exe
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\bin\Debug\Geometria Obliczeniowa.pdb
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\Geometria Obliczeniowa.csprojResolveAssemblyReference.cache
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\Geometria_Obliczeniowa.Form1.resources
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\Geometria_Obliczeniowa.Properties.Resources.resources
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\Geometria Obliczeniowa.csproj.GenerateResource.Cache
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\Geometria Obliczeniowa.csproj.CoreCompileInputs.cache
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\Geometria Obliczeniowa.exe
+C:\Users\Piotrek\Desktop\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\Geometria Obliczeniowa.pdb
