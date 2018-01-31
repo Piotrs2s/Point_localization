@@ -28,3 +28,13 @@ C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Cw1\Geometria Obliczeniowa\Geomet
 C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Cw1\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\cw1.csproj.CoreCompileInputs.cache
 C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Cw1\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\cw1.exe
 C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Cw1\Geometria Obliczeniowa\Geometria Obliczeniowa\obj\Debug\cw1.pdb
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\bin\Debug\cw1.exe.config
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\bin\Debug\cw1.exe
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\bin\Debug\cw1.pdb
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\obj\Debug\cw1.csprojResolveAssemblyReference.cache
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\obj\Debug\cw1.Form1.resources
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\obj\Debug\cw1.Properties.Resources.resources
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\obj\Debug\cw1.csproj.GenerateResource.Cache
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\obj\Debug\cw1.csproj.CoreCompileInputs.cache
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\obj\Debug\cw1.exe
+C:\Users\Piotrek\Studia\Geometria Obliczeniowa\Repo\Point_localization\Geometria Obliczeniowa\obj\Debug\cw1.pdb
