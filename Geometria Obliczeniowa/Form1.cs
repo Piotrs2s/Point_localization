@@ -8,80 +8,85 @@ namespace cw1
     public partial class Form1 : Form
     {
         //bitmap
-        private readonly Graphics _graphics;
-        private readonly Random _random;
-        private int k, n, size;
-        private double _sum;
+        public readonly Graphics Graphics;
+        public readonly Random Random;
+
+        //Size of bitmap
+        public new int Size;
+
+        public int PointsQuantity = 10000;
+        public double Sum;
 
         //vertices arrays
-        private Point[] _firstPolygon;
-        private Point[] _secondPolygon;
+        public Point[] firstPolygon;
+        public Point[] secondPolygon;
         //points array
-        private Point[] _randomPoints;
+        public Point[] RandomPoints;
 
         public Form1()
         {
             InitializeComponent();
-            size = 599;
-            _graphics = pictureBox1.CreateGraphics(); //create bitmap
-            _random = new Random();
-            _graphics.Clear(Color.White);
+            
+            Graphics = pictureBox1.CreateGraphics(); //create bitmap
+
+            Size = pictureBox1.Size.Width;
+            Random = new Random();
+            Graphics.Clear(Color.White);
 
         }
 
         //Main button
         private void button1_Click(object sender, EventArgs e)
         {
-            _graphics.Clear(Color.White);
-            CreatePolygon(ref _firstPolygon, 0, 200);
-            CreatePolygon(ref _secondPolygon, 200, size - 100);
+            Graphics.Clear(Color.White);
+            CreatePolygon(ref firstPolygon, 0, 200);
+            CreatePolygon(ref secondPolygon, 200, Size - 100);
             CreatePoints();
             Estimate();
         }
         //Generates polygons 
-        private void CreatePolygon(ref Point[] points, int dlimit, int ulimit) //dlimit, ulimit - borders of possible polygon coordinates
+        private void CreatePolygon(ref Point[] Points, int dlimit, int ulimit) // dlimit (down limit), ulimit (up limit) - borders of possible polygon coordinates
         {
-            var size = _random.Next(3, 6); //quantity of vertices
-            points = new Point[size];
+            var verticesQuantity = Random.Next(3, 6); // Quantity of vertices
+            Points = new Point[verticesQuantity]; //list with polygons vertices coordinates
 
-            //vertice coordinates
-            for (int i = 0; i < size; i++)
+            //Get vertices coordinates
+            for (int i = 0; i < verticesQuantity; i++)
             {
-                var x = _random.Next(30, this.size - 150);
-                var y = _random.Next(dlimit, ulimit);
-
+                var x = Random.Next(30, this.Size - 150);
+                var y = Random.Next(dlimit, ulimit);
 
                 var point = new Point(x, y);
-                points[i] = point;
+                Points[i] = point;
             }
 
-            _graphics.DrawPolygon(new Pen(Color.Red), points);
+            Graphics.DrawPolygon(new Pen(Color.Red), Points); // Draw polygons
         }
 
         //Random points generation
         private void CreatePoints()
         {
-            _randomPoints = new Point[10000];
-            for (int i = 0; i < 10000; i++)
+            RandomPoints = new Point[PointsQuantity];
+            for (int i = 0; i < RandomPoints.Length; i++)
             {
                 var point = new Point
                 {
-                    X = _random.Next(0, size),
-                    Y = _random.Next(0, size)
+                    X = Random.Next(0, Size),
+                    Y = Random.Next(0, Size)
                 };
-                _randomPoints[i] = point;
-                _graphics.FillRectangle(new SolidBrush(Color.Blue), point.X, point.Y, 1, 1);
+                RandomPoints[i] = point;
+                Graphics.FillRectangle(new SolidBrush(Color.Blue), point.X, point.Y, 1, 1);
             }
         }
 
-        //Wykonanie obliczeń
+        #region Calculations
         private void Estimate()
         {
-            _sum = 0;
-            //textBox1.Text = "";
+            Sum = 0;
 
-            Calculate(_firstPolygon, textBox1);
-            Calculate(_secondPolygon, textBox2);
+
+            Calculate(firstPolygon, textBox1);
+            Calculate(secondPolygon, textBox2);
 
             //count area of polygons
             textBox3.Text = Area().ToString();
@@ -90,9 +95,9 @@ namespace cw1
         //calculates quantity of points in polygon  
         private void Calculate(Point[] points, TextBox textBox)
         {
-
+            
             int i;
-            n = points.Length;
+            int  n = points.Length;
             int Points = 0;
             int maxX = int.MinValue;  
 
@@ -103,24 +108,25 @@ namespace cw1
                     maxX = points[i].X;
             }
             //the most-forward X coordinate
-            int rx = maxX + 1;
+            Point r = new Point() {X = maxX+1 };
 
             //Check each generated point
-            foreach (var point in _randomPoints)
+            foreach (var point in RandomPoints)
             {
-
-                int ry = point.Y;
-                int c = 0; // c- quantity of cuts between point testline and polygon side
+                r.Y = point.Y;
+                
+                int c = 0; // c - quantity of cuts between point testline and polygon side
                 for (i = 0; i < points.Length; i++)
                 {
                     //Check if point testline is part of polygon side
-                    if (IsPart(points[i].X, points[i].Y, points[(i + 1) % n].X, points[(i + 1) % n].Y, point.X, point.Y) == 1)
+                    if (IsPart(points[i], points[(i + 1) % n], point) == 1)
                     {
                         c++;
                     }
                     //Check if point testline crosses polygon side
-                    if (IsCrossing(points[i].X, points[i].Y, points[(i + 1) % n].X, points[(i + 1) % n].Y, point.X, point.Y, rx, ry))
+                    else if (IsCrossing(points[i], points[(i + 1) % n], point, r))
                         c++;
+                    
                 }
 
 
@@ -132,80 +138,45 @@ namespace cw1
             }
 
             //Sum of points in polygons
-            _sum += Points;
+            Sum += Points;
             textBox.Text = Points.ToString();
 
         }
         
-        private int IsPart(int ax, int ay, int bx, int by, int cx, int cy)
+        //Method IsPart compares coordinates of given points and and check is point c is between a and b
+        private int IsPart(Point a, Point b, Point c)
         {
-            int det = Det(ax, ay, bx, by, cx, cy);
+            int det = Det(a, b, c);
             if (det != 0)
                 return 0;
-            if ((Math.Min(ax, bx) <= cx) && (cx <= Math.Max(ax, bx)) &&
-                (Math.Min(ay, by) <= cy) && (cy <= Math.Min(ay, by)))
+            if ((Math.Min(a.X, b.X) <= c.X) && (c.X <= Math.Max(a.X, b.X)) &&
+                (Math.Min(a.Y, b.Y) <= c.Y) && (c.Y <= Math.Min(a.Y, b.Y)))
                 return 1;
             return 0;
         }
 
         //determinant of the matrix
-        private static int Det(int xx, int xy, int yx, int yy, int zx, int zy)
+        private static int Det(Point x, Point y, Point z)
         {
-            return (xx * yy + yx * zy + zx * xy - zx * yy - xx * zy - yx * xy);
+            return (x.X * y.Y + y.X * z.Y + z.X * x.Y - z.X * y.Y - x.X * z.Y - y.X * x.Y);
+        }
+       
+
+        private bool IsCrossing(Point a, Point b, Point p, Point r)
+        {
+
+            return (Math.Sign(Det(p, r, a)) != Math.Sign(Det(p, r, b))) &&
+                   (Math.Sign(Det(a, b, p)) != Math.Sign(Det(a, b, r)));
         }
 
-        
-        private bool IsCrossing(int ax, int ay, int bx, int by, int px, int py, int rx, int ry)
-        {
-            
-            return (Math.Sign(Det(px, py, rx, ry, ax, ay)) != Math.Sign(Det(px, py, rx, ry, bx, by))) &&
-                   (Math.Sign(Det(ax, ay, bx, by, px, py)) != Math.Sign(Det(ax, ay, bx, by, rx, ry)));
-        }
 
         //Estimate polygons area based on points in polygons quantity
         private double Area()
         {
-            return _sum / 10000 * (500 * 500);
+            return Sum / PointsQuantity * (500 * 500);
         }
 
-        #region MyRegion
-        private void button4_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            
-        }
         #endregion
-
-
-
+       
     }
 }
